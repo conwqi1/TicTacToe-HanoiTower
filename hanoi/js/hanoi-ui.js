@@ -14,13 +14,9 @@
     var that = this;
     var $stacks = $(".stack");
     $stacks.click(function(event) {
-      if (event.currentTarget === $(that.tower).parent()) {
-        that.cancelSelection();
-        return;
-      }
       if (that.tower === "") {
         var children = $(event.currentTarget).children();
-        if (typeof children.length === 0) {
+        if (children.length === 0) {
           return;
         }
         that.selectTower($(children[0]));
@@ -29,11 +25,6 @@
         that.dropTower($stack);
       }
     });
-  };
-  
-  UI.prototype.cancelSelection = function () {
-    this.tower.removeClass("red");
-    this.tower = "";
   };
   
   UI.prototype.selectTower = function ($tower) {
@@ -62,6 +53,4 @@
       $(".message").html("You won!");
     }
   };
-  
-
 })();

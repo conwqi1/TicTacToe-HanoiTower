@@ -8,6 +8,7 @@
     this.$el = $el;
     this.bindEvents();
     this.tower = "";
+    this.counter = 0;
   };
   
   UI.prototype.bindEvents = function () {
@@ -35,6 +36,8 @@
   UI.prototype.dropTower = function ($stack) {
     if (this.makeMove(this.tower, $stack)) {
       $stack.prepend(this.tower);
+      this.counter++;
+      $(".message").html(this.counter + " moves");
       this.isWon();
     } 
     this.tower.removeClass("red");
@@ -50,7 +53,7 @@
   UI.prototype.isWon = function () {
     if (this.game.isWon()) {
       $(".stack").off("click");
-      $(".message").html("You won!");
+      $(".message").html("You won! (" + this.counter + " moves)");
     }
   };
 })();
